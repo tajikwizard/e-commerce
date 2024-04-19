@@ -12,7 +12,14 @@ const Header = () => {
             </h1>
           </Link>
         </div>
-
+        <div className="navigation mt-2 text-xl">
+          <Link
+            to="/products"
+            className="list-none hover:text-red-500 hover:cursor-pointer"
+          >
+            Products
+          </Link>
+        </div>
         <div className="formContainer flex flex-col md:flex-row items-center mt-4 md:mt-0 ">
           <input
             className="p-2 border rounded-md mb-2 md:mb-0 md:mr-2 w-full md:w-auto focus:outline-none hover:shadow"
