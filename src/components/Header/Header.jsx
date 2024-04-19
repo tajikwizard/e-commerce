@@ -3,7 +3,7 @@ import cartSvg from "../../assets/cart.svg";
 
 const Header = () => {
   return (
-    <div className="wrapper">
+    <div className="">
       <header className="header flex flex-col md:flex-row justify-between p-4 md:p-8 border items-center">
         <div className="logoContainer">
           <Link to="/">
