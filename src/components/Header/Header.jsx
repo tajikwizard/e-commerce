@@ -63,7 +63,7 @@ const Header = ({ onSearch }) => {
             style={{ width: "50px", height: "50px" }}
           />
           <span className="absolute top-0 right-0 bg-red-500 text-white rounded-full px-2 py-1 text-xs">
-            {cartItems}
+            {cartItems.length}
           </span>
         </Link>
       </header>
