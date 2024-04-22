@@ -5,7 +5,7 @@ import { Outlet, createSearchParams, useNavigate } from "react-router-dom";
 function App() {
   const navigate = useNavigate();
   const onSearch = (searchTerm) => {
-    navigate(`/products?${createSearchParams({ q: searchTerm })}`);
+    navigate(`/?${createSearchParams({ q: searchTerm })}`);
   };
 
   return (
