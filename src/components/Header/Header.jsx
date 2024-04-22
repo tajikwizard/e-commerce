@@ -6,7 +6,7 @@ import { useCart } from "../../cartContext.jsx";
 const Header = ({ onSearch }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const { cartItems, addToCart, removeFromCart, clearCart } = useCart();
-
+alert(cartItems);
   const handleSubmit = (e) => {
     e.preventDefault();
     if (searchTerm.trim().length) {
@@ -63,7 +63,7 @@ const Header = ({ onSearch }) => {
             style={{ width: "50px", height: "50px" }}
           />
           <span className="absolute top-0 right-0 bg-red-500 text-white rounded-full px-2 py-1 text-xs">
-            {cartItems.length}
+            3
           </span>
         </Link>
       </header>
