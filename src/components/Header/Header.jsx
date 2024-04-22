@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import cartSvg from "../../assets/cart.svg";
-import {useCart} from '../../cartContext.jsx';
+import {useCart} from "../../cartContext";
 
 const Header = ({ onSearch }) => {
   const [searchTerm, setSearchTerm] = useState("");
