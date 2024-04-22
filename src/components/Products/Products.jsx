@@ -1,31 +1,34 @@
 import React, { useEffect, useState } from "react";
 import Product from "./Product";
 import { fakeStoreApi } from "../../services/fake-store-api";
+import { useSearchParams } from "react-router-dom";
 
 const Products = () => {
   const [loading, setLoading] = useState(true);
   const [products, setProducts] = useState([]);
+  const [query] = useSearchParams();
 
+  const searchQuery = query.get("q");
+  console.log(searchQuery);
   useEffect(() => {
     const fetchProducts = async () => {
       setLoading(true);
-      try {
-        const products = await fakeStoreApi.fetchAllProducts();
-        setProducts(products);
-        setLoading(false);
-      } catch (error) {
-        console.error("Error fetching products:", error);
-        setLoading(false);
-      }
+      const products = searchQuery
+        ? await fakeStoreApi.fetchProductsBySearchQuery(searchQuery)
+        : await fakeStoreApi.fetchAllProducts();
+      setProducts(products);
+      setLoading(false);
     };
-    fetchProducts();
-  }, []); // Empty dependency array to run the effect only once
+    fetchProducts().catch(console.error);
+  }, [searchQuery]);
 
-  if (!products.length) {
+  if (!loading && searchQuery && !products.length) {
     return (
       <div className="container">
         <div className="product py-2">
-          <div className="details p-3">No products found</div>
+          <div className="details p-3">
+            No products found matching your query.
+          </div>
         </div>
       </div>
     );

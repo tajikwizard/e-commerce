@@ -21,7 +21,7 @@ const ProductDetails = () => {
     };
     fetchProduct();
   }, [productId]);
-
+  console.log(product);
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -39,6 +39,12 @@ const ProductDetails = () => {
           className="w-64 h-64 mb-4 rounded-md"
         />
         <h2 className="text-2xl font-bold mb-2">{product.title}</h2>
+        <div className="category_conttainer">
+          <span className="bg-red-300 block w-32 p-1 text-center text-white font-bold rounded-md">
+            {" "}
+            {product.category}
+          </span>
+        </div>
         <p className="text-lg mb-4">${product.price}</p>
         <p className="text-gray-700 mb-4">{product.description}</p>
 

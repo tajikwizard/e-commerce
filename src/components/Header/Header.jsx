@@ -1,7 +1,19 @@
+// Header.jsx - Adjusted handleSubmit function to pass the search term to the onSearch prop
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import cartSvg from "../../assets/cart.svg";
 
-const Header = () => {
+const Header = ({ onSearch }) => {
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (searchTerm.trim().length) {
+      onSearch(searchTerm.trim()); // Pass the search term to the onSearch prop
+    }
+    setSearchTerm("");
+  };
+
   return (
     <div className="">
       <header className="header flex flex-col md:flex-row justify-between p-4 md:p-8 border items-center">
@@ -21,19 +33,25 @@ const Header = () => {
           </Link>
         </div>
         <div className="formContainer flex flex-col md:flex-row items-center mt-4 md:mt-0 ">
-          <input
-            className="p-2 border rounded-md mb-2 md:mb-0 md:mr-2 w-full md:w-auto focus:outline-none hover:shadow"
-            type="text"
-            name="search"
-            id="search"
-            placeholder="Search product..."
-          />
-          <button
-            className="p-2 border rounded-md w-full md:w-auto hover:shadow"
-            type="button"
-          >
-            Search
-          </button>
+          <form onSubmit={handleSubmit}>
+            {" "}
+            {/* Use form tag to handle form submission */}
+            <input
+              className="p-2 border rounded-md mb-2 md:mb-0 md:mr-2 w-full md:w-auto focus:outline-none hover:shadow"
+              type="text"
+              name="search"
+              id="search"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              placeholder="Search product..."
+            />
+            <button
+              type="submit" // Change type to submit to trigger handleSubmit on button click
+              className="p-2 border rounded-md w-full md:w-auto hover:shadow"
+            >
+              Search
+            </button>
+          </form>
         </div>
 
         <Link to="/cart" className="relative mt-4 md:mt-0">
