@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { fakeStoreApi } from "../../services/fake-store-api";
+import { useCart } from "../../cartContext";
 
 const ProductDetails = () => {
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const { productId } = useParams();
-
+  const { addToCart } = useCart();
   useEffect(() => {
     const fetchProduct = async () => {
       setLoading(true);
@@ -48,7 +49,10 @@ const ProductDetails = () => {
         <p className="text-lg mb-4">${product.price}</p>
         <p className="text-gray-700 mb-4">{product.description}</p>
 
-        <button className="bg-green-500 p-2 w-36 rounded-md text-white font-bold hover:bg-green-400">
+        <button
+          onClick={() => addToCart(product)}
+          className="bg-green-500 p-2 w-36 rounded-md text-white font-bold hover:bg-green-400"
+        >
           Add To Cart
         </button>
       </div>

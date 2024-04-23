@@ -1,28 +1,57 @@
-import React, { createContext, useState, useContext } from 'react';
+import React, { createContext, useState, useContext } from "react";
 
-// Creating the CartContext
 const CartContext = createContext();
 
-// Custom hook to use the CartContext
 export const useCart = () => useContext(CartContext);
 
-// CartProvider component to wrap around your application
 export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
 
-  // Function to add an item to the cart
   const addToCart = (item) => {
-    setCartItems([...cartItems, item]);
+    const isItemInCart = cartItems.find((cartItem) => cartItem.id === item.id);
+
+    if (isItemInCart) {
+      setCartItems(
+        cartItems.map((cartItem) =>
+          cartItem.id == item.id
+            ? { ...cartItem, quantity: cartItem.quantity + 1 }
+            : cartItem
+        )
+      );
+    } else {
+      setCartItems([...cartItems, { ...item, quantity: 1 }]);
+    }
   };
 
-  // Function to remove an item from the cart
-  const removeFromCart = (index) => {
-    const newCartItems = [...cartItems];
-    newCartItems.splice(index, 1);
-    setCartItems(newCartItems);
+  const calculateTotalPrice = () => {
+    const totalPrice = cartItems.reduce((total, product) => {
+      return total + product.price * product.quantity;
+    }, 0);
+
+    // Limit to two decimal places and convert to string
+    return totalPrice.toFixed(2);
+  };
+  const increaseQuantity = (productId) => {
+    const copy = cartItems.slice();
+    const productIdx = copy.findIndex((product) => product.id === productId);
+    if (productIdx !== -1) {
+      copy[productIdx].quantity += 1;
+      setCartItems(copy);
+    }
   };
 
-  // Function to clear the cart
+  const decreaseQuantity = (productId) => {
+    const copy = cartItems.slice();
+    const productIdx = copy.findIndex((product) => product.id === productId);
+    if (productIdx !== -1 && copy[productIdx].quantity > 1) {
+      copy[productIdx].quantity -= 1;
+      setCartItems(copy);
+    }
+  };
+  const removeFromCart = (productId) => {
+    setCartItems(cartItems.filter((product) => product.id !== productId));
+  };
+
   const clearCart = () => {
     setCartItems([]);
   };
@@ -34,6 +63,9 @@ export const CartProvider = ({ children }) => {
         addToCart,
         removeFromCart,
         clearCart,
+        calculateTotalPrice,
+        increaseQuantity,
+        decreaseQuantity,
       }}
     >
       {children}

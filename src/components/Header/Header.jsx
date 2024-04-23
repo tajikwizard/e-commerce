@@ -2,11 +2,9 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import cartSvg from "../../assets/cart.svg";
-import { useCart } from "../../cartContext.jsx";
+import { useCart } from "../../cartContext";
 const Header = ({ onSearch }) => {
   const [searchTerm, setSearchTerm] = useState("");
-  const { cartItems, addToCart, removeFromCart, clearCart } = useCart();
-alert(cartItems);
   const handleSubmit = (e) => {
     e.preventDefault();
     if (searchTerm.trim().length) {
@@ -14,10 +12,10 @@ alert(cartItems);
     }
     setSearchTerm("");
   };
-
+  const { cartItems } = useCart();
   return (
-    <div className="">
-      <header className="header flex flex-col md:flex-row justify-between p-4 md:p-8 border items-center">
+    <div className="mt-36">
+      <header className=" fixed top-0 bg-white w-full header flex flex-col md:flex-row justify-between p-4 md:p-8 border items-center">
         <div className="logoContainer">
           <Link to="/">
             <h1 className="text-2xl md:text-3xl font-semibold hover:underline">
@@ -63,7 +61,7 @@ alert(cartItems);
             style={{ width: "50px", height: "50px" }}
           />
           <span className="absolute top-0 right-0 bg-red-500 text-white rounded-full px-2 py-1 text-xs">
-            3
+            {cartItems.length}
           </span>
         </Link>
       </header>

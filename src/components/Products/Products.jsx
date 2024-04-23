@@ -2,14 +2,15 @@ import React, { useEffect, useState } from "react";
 import Product from "./Product";
 import { fakeStoreApi } from "../../services/fake-store-api";
 import { useSearchParams } from "react-router-dom";
-
+import { useCart } from "../../cartContext";
 const Products = () => {
   const [loading, setLoading] = useState(true);
   const [products, setProducts] = useState([]);
   const [query] = useSearchParams();
 
+  const { addToCart } = useCart();
   const searchQuery = query.get("q");
-  console.log(searchQuery);
+
   useEffect(() => {
     const fetchProducts = async () => {
       setLoading(true);
@@ -39,7 +40,13 @@ const Products = () => {
       {loading ? (
         <div>Loading...</div>
       ) : (
-        products.map((product) => <Product key={product.id} {...product} />)
+        products.map((product) => (
+          <Product
+            key={product.id}
+            data={product}
+            addToCart={() => addToCart(product)}
+          />
+        ))
       )}
     </div>
   );
