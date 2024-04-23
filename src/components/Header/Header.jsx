@@ -30,6 +30,13 @@ const Header = ({ onSearch }) => {
             className="list-none hover:text-red-500 hover:cursor-pointer"
           >
             Products
+          </Link>{" "}
+          | |{" "}
+          <Link
+            to="/invoice"
+            className="list-none hover:text-red-500 hover:cursor-pointer"
+          >
+            Invoice
           </Link>
         </div>
         <div className="formContainer flex flex-col md:flex-row items-center mt-4 md:mt-0 ">
