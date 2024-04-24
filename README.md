@@ -2,4 +2,4 @@
 
 ![alt text](http://url/to/img.png)
 
-![Screenshot](./src/assets/screenshot.png)
+![Screenshot](./src/assets/screenshop.png)
