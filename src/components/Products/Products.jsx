@@ -59,24 +59,26 @@ const Products = () => {
   }
 
   return (
-    <div className="container mx-auto">
-      <div className="mb-4 p-10">
-        <h2 className="text-2xl font-bold mb-2 ">Categories:</h2>
-        <div className="flex space-x-2 flex-wrap gap-2">
-          {["All", ...categories].map((category) => (
-            <button
-              key={category}
-              className={`bg-gray-200 hover:bg-gray-300 px-4 py-2 rounded ${
-                selectedCategory === category ? "bg-blue-200" : ""
-              }`}
-              onClick={() => handleCategoryClick(category)}
-            >
-              {category}
-            </button>
-          ))}
+    <div className="container mx-auto ">
+      <div className="sticky top-[275px] md:top-28 ">
+        <div className="mb-4 p-10  bg-white z-10  flex flex-col items-center justify-center">
+          <h2 className="text-2xl font-bold mb-2">Categories:</h2>
+          <div className="flex space-x-2 flex-wrap gap-2  justify-center">
+            {["All", ...categories].map((category) => (
+              <button
+                key={category}
+                className={`bg-gray-200 hover:bg-gray-300 px-4 py-2 rounded ${
+                  selectedCategory === category ? "bg-blue-200" : ""
+                }`}
+                onClick={() => handleCategoryClick(category)}
+              >
+                {category}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 p-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 p-4 mt-20">
         {loading ? (
           <div>Loading...</div>
         ) : (
