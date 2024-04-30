@@ -1,7 +1,7 @@
 const fakeStoreApi = {
   fetchAllProducts: async () => {
     const res = await fetch("https://fakestoreapi.com/products");
-    const result = res.json();
+    const result = await res.json();
     return result;
   },
 
@@ -24,6 +24,20 @@ const fakeStoreApi = {
     return result.filter((product) =>
       product.title.toLowerCase().includes(query.toLowerCase())
     );
+  },
+
+  fetchProductsByCategory: async (category) => {
+    const res = await fetch(
+      `https://fakestoreapi.com/products/category/${category}`
+    );
+    const result = await res.json();
+    return result;
+  },
+
+  fetchAllCategories: async () => {
+    const res = await fetch("https://fakestoreapi.com/products/categories");
+    const result = await res.json();
+    return result;
   },
 };
 

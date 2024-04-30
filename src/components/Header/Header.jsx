@@ -15,8 +15,8 @@ const Header = ({ onSearch }) => {
   };
 
   return (
-    <div className="">
-      <header className="header flex flex-col md:flex-row justify-between p-4 md:p-8 border items-center">
+    <div className="mb-96">
+      <header className="header flex flex-col md:flex-row justify-between p-4 md:p-8 border items-center fixed top-0 w-full bg-white ">
         <div className="logoContainer">
           <Link to="/">
             <h1 className="text-2xl md:text-3xl font-semibold hover:underline">
