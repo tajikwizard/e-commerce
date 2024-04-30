@@ -60,9 +60,9 @@ const Products = () => {
 
   return (
     <div className="container mx-auto">
-      <div className="mb-4">
-        <h2 className="text-2xl font-bold mb-2">Categories:</h2>
-        <div className="flex space-x-2">
+      <div className="mb-4 p-10">
+        <h2 className="text-2xl font-bold mb-2 ">Categories:</h2>
+        <div className="flex space-x-2 flex-wrap gap-2">
           {["All", ...categories].map((category) => (
             <button
               key={category}
